@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+// Containers
+
+// Component
 
 const routes: Routes = [];
 
@@ -12,4 +15,4 @@ const routes: Routes = [];
     RouterModule
   ]
 })
-export class AppRoutingModule { }
+export class MoviesRoutingModule { }
