@@ -1,0 +1,34 @@
+{
+  "movies": [
+    {
+      "id": "f48115dd-5911-4311-a529-42aedb2b9af3",
+      "name": "Jason Bourne",
+      "premiereTimestamp": 1584295495000,
+      "available": false
+    },
+    {
+      "id": "2507c2cc-ca5d-48ac-8185-1b1c3e2934ad",
+      "name": "Alicia en el pais de las maravillas",
+      "premiereTimestamp": 1583949895000,
+      "available": true
+    },
+    {
+      "id": "e30165e0-45ad-4b74-9c9f-2535d7aa3f46",
+      "name": "Tarzan la leyenda",
+      "premiereTimestamp": 1585159495000,
+      "available": true
+    },
+    {
+      "id": "770af435-9c47-4f6c-ab58-0af5269519d3",
+      "name": "Nada es lo que parece 2",
+      "premiereTimestamp": 1585850695000,
+      "available": true
+    },
+    {
+      "id": "33716dfb-b2bc-4229-9024-5922908a7cc9",
+      "name": "The Warriors",
+      "premiereTimestamp": 1586973895000,
+      "available": false
+    }
+  ]
+}
