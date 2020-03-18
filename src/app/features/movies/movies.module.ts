@@ -7,7 +7,7 @@ import { MoviesRoutingModule } from './movies-routing.module';
 import { StoreModule } from '@ngrx/store';
 
 // Containers
-
+import { MoviesComponent } from './containers/movies/movies.component';
 // Components
 
 // Services
@@ -18,17 +18,18 @@ import { FEAUTURE_NAME, reducers } from "./movies.state";
 import { EffectsModule } from '@ngrx/effects';
 
 
+
 @NgModule({
-  declarations: [],
+  declarations: [MoviesComponent],
   imports: [
     CommonModule,
 
     SharedModule,
     MoviesRoutingModule,
-    StoreModule.forFeature(FEAUTURE_NAME, reducers),
-    EffectsModule.forFeature([
+    // StoreModule.forFeature(FEAUTURE_NAME, reducers),
+    // EffectsModule.forFeature([
 
-    ]),
+    // ]),
   ],
   providers: [
     MoviesService,
