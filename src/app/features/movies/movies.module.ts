@@ -16,6 +16,7 @@ import { MoviesService } from './api/movies.service';
 // Store
 import { FEAUTURE_NAME, reducers } from "./movies.state";
 import { EffectsModule } from '@ngrx/effects';
+import { MoviesEffects } from './store/movies.effects';
 
 
 
@@ -26,10 +27,10 @@ import { EffectsModule } from '@ngrx/effects';
 
     SharedModule,
     MoviesRoutingModule,
-    // StoreModule.forFeature(FEAUTURE_NAME, reducers),
-    // EffectsModule.forFeature([
-
-    // ]),
+    StoreModule.forFeature(FEAUTURE_NAME, reducers),
+    EffectsModule.forFeature([
+      MoviesEffects
+    ]),
   ],
   providers: [
     MoviesService,

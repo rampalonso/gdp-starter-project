@@ -4,5 +4,8 @@
       <mat-toolbar color="primary">GDP Starter project</mat-toolbar>
       <p class="text-left mt-3 ml-1">Proyecto configurado para poder realizar los prototipados</p>
     </div>
+    <div class="col-12">
+      <pre>{{ (movies$ | async)?.movies | json }}</pre>
+    </div>
   </div>
 </div>

@@ -22,7 +22,7 @@ import { AppComponent } from './app/app.component';
     AppRoutingModule,
     BrowserAnimationsModule,
 
-    // CoreModule,
+    CoreModule,
     SharedModule,
     LayoutModule,
   ],
