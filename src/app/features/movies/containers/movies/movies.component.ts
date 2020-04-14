@@ -1,28 +1,34 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { MoviesService } from '../../api/movies.service';
-import { Observable } from 'rxjs';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { MoviesState } from '../../store/movies.model';
-import { State } from '../../movies.state';
-import { selectMovies } from '../../store/movies.selector';
-import { actionMoviesGetList } from '../../store/movies.actions';
+
+import { Movie } from '../../models/movie';
+import { fromMoviesActions } from '../../store/movies.action';
+import { getAllMovies } from '../../store/movies.selector';
 
 @Component({
   selector: 'gdp-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MoviesComponent implements OnInit {
+export class MoviesComponent implements OnInit, OnDestroy {
 
-  movies$: Observable<MoviesState> = this.store.pipe(select(selectMovies));
+  movies$ = this.store.pipe(select(getAllMovies));
 
   constructor(
-    private store: Store<State>,
+    private store: Store<any>,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(actionMoviesGetList())
+    this.store.dispatch((fromMoviesActions.loadMovies()))
+  }
+
+  onMovieSelected(movie: Movie) {
+    this.router.navigate(['/movies', movie.id])
+  }
+
+  ngOnDestroy(): void {
   }
 
 }

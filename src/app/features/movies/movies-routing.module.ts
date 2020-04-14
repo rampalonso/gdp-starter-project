@@ -3,17 +3,27 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Containers
 import { MoviesComponent } from './containers/movies/movies.component';
+import { MoviesWriteComponent } from './containers/movies-write/movies-write.component';
 
 // Component
+
+// Services
+import { MoviesWriteResolveService } from './containers/movies-write/movies-write.service';
+
 
 const routes: Routes = [
   { 
     path: '', 
-    pathMatch: 'full', 
-    component: MoviesComponent, 
-    data: { 
-      title: 'Peliculas'
-    } 
+    component: MoviesComponent,
+    children: [
+      {
+        path: ':id',
+        component: MoviesWriteComponent,
+        resolve: {
+          movie: MoviesWriteResolveService
+        }
+      },
+    ]
   },
   {
     path: '**',

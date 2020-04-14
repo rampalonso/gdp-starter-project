@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children: [
-      { path: 'movies', loadChildren: () => import('./features/movies/movies.module').then(m => m.MoviesModule) }
+      { path: 'movies', loadChildren: () => import('./features/movies/movies.module').then(m => m.MoviesModule) },
     ]
   },
   { path: '**', redirectTo: '/movies' },
@@ -15,7 +15,11 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      // enableTracing: true
+      // onSameUrlNavigation: 'reload'
+      // useHash: true
+    })
   ],
   exports: [
     RouterModule

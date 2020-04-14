@@ -1,41 +1,44 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity'
 
-import { MoviesState } from './movies.model'
+import { Movie } from '../models/movie';
+import { fromMoviesActions } from './movies.action';
 
-import {
-  actionMoviesGetList, 
-  actionMoviesGetListSuccess,
-  actionMoviesGetListError,
-} from './movies.actions'
-
-export const initialState: MoviesState = {
-  movies: [],
-  loading: false,
-  error: null,
+export interface MoviesState extends EntityState<Movie> {
+  moviesLoaded: boolean;
+  error?: Error | any;
 }
+
+const adapter: EntityAdapter<Movie> = createEntityAdapter<Movie>();
+
+const initialState: MoviesState = adapter.getInitialState({
+  moviesLoaded: false
+});
 
 const reducer = createReducer(
   initialState,
-  on(actionMoviesGetList, (state) => ({ 
-    ...state,
-    loading: true,
-    error: null,
-  })),
-  on(actionMoviesGetListSuccess, (state, { movies }) => ({
-    ...state,
-    movies,
-    loading: false
-  })),
-  on(actionMoviesGetListError, (state, { error }) => ({
-    ...state,
-    error,
-    loading: false
-  }))
+  on(fromMoviesActions.loadMoviesSuccess, (state, action) => (
+    adapter.setAll(
+      action.movies,
+      { ...state, moviesLoaded: true }
+    )
+  )),
+  on(fromMoviesActions.createMovie, (state, action) => (
+    adapter.addOne(action.movie, state)
+  )),
+  on(fromMoviesActions.editMovie, (state, action) => (
+    adapter.updateOne(action.update, state)
+  ))
 )
 
 export function moviesReducer(
   state: MoviesState | undefined,
   action: Action
 ) {
-  return reducer(state, action);
-}
+  return reducer(state, action)
+};
+
+export const {
+  selectAll,
+  selectIds
+} = adapter.getSelectors();

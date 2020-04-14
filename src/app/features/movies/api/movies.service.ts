@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
+import { Movie } from '../models/movie';
+
 
 export const MOVIES_API = environment.FAKE_API;
 
@@ -12,19 +16,23 @@ export class MoviesService {
   ) { }
 
   getMovies() {
-    return this.http.get(`${MOVIES_API}/movies`);
+    return this.http.get<Movie[]>(`${MOVIES_API}/movies`);
   }
 
-  getMovie() {
-
+  getAllMovies(): Observable<Movie[]> {
+    return this.http.get<Movie[]>(`${MOVIES_API}/movies`);
   }
 
-  newMovie() {
-
+  getMovie(id: string): Observable<Movie> {
+    return this.http.get<Movie>(`${MOVIES_API}/movies/${id}`);
   }
 
-  activateMovie() {
+  createMovie(movie): Observable<Movie> {
+    return this.http.post<Movie>(`${MOVIES_API}/movies`, movie);
+  }
 
+  editMovie(id: string | number, movie: Partial<Movie>): Observable<Movie> {
+    return this.http.put<Movie>(`${MOVIES_API}/movies/${id}`, movie);
   }
 
 
