@@ -10,6 +10,14 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
+$gdp-primary: mat-palette($mat-indigo);
+$gdp-warn: mat-palette($mat-pink);
+$gdp-success: mat-palette($mat-green, A700);
+
+.gdp-primary {  color: mat-color($gdp-primary); }
+.gdp-warn {  color: mat-color($gdp-warn); }
+.gdp-success {  color: mat-color($gdp-success); }
+
 html, body { height: 100%; }
 body { 
   margin: 0; 
